@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6pb0gciujh6u"]
+
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_tvjdi"]
+[ext_resource type="Script" path="res://Scripts/Player/smooth_camera.gd" id="2_jeehy"]
+[ext_resource type="Script" path="res://Scripts/Player/crosshair.gd" id="3_7g1b5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jgdun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ij2n"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_tvjdi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_jgdun")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_0ij2n")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
+top_level = true
+script = ExtResource("2_jeehy")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="CenterContainer"]
+layout_mode = 2
+script = ExtResource("3_7g1b5")
